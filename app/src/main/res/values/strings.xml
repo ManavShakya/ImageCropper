@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ImageCropper</string>
+    <string name="title_activity_crop">CropActivity</string>
+    <string name="activity_name">Crop</string>
+    <string name="crop">Crop</string>
+    <string name="upload">Upload</string>
+</resources>
