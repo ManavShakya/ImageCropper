@@ -3,12 +3,10 @@ package com.example.imagecropper.ui
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Intent
-import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -20,7 +18,6 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
 import java.io.IOException
 import java.util.*
-
 
 class CropperActivity : AppCompatActivity() {
     private lateinit var mCropImageView: CropImageView
@@ -34,8 +31,6 @@ class CropperActivity : AppCompatActivity() {
     private lateinit var horizontalWheelView: HorizontalWheelView
 
     private lateinit var angleText: TextView
-    private var angle1 = 0
-    private lateinit var text: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +54,9 @@ class CropperActivity : AppCompatActivity() {
         cropButton.setOnClickListener {
             val cropped = mCropImageView.croppedImage
             mCropImageView.setImageBitmap(cropped)
-            angle1 = 0
+           // Resetting horizontalWheelView when crop button is clicked
             angleText.text = "0°"
-            if(angle1 == 0)
-                mCropImageView.isAutoZoomEnabled = true
+            horizontalWheelView.degreesAngle = 0.0
         }
 
         rotateView.setOnClickListener {
@@ -81,14 +75,13 @@ class CropperActivity : AppCompatActivity() {
     }
 
     private fun updateUi() {
-        angle1 = horizontalWheelView.degreesAngle.toInt()
+        val angle1 = horizontalWheelView.degreesAngle.toInt()
         val angle = angle1 - mCropImageView.rotatedDegrees
         if(angle1 in  -45..45) {
+            mCropImageView.isAutoZoomEnabled = mCropImageView.rotatedDegrees == 0
             mCropImageView.rotateImage(angle)
-            text = angle1.toString()
-            angleText.text = "$text°"
             mCropImageView.setMaxCropResultSize(mCropImageView.width*4, mCropImageView.height*4)
-                mCropImageView.isAutoZoomEnabled = false
+            angleText.text = "$angle1°"
         }
 
     }
