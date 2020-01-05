@@ -1,0 +1,88 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/CropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cropGuidelines="on"
+        app:cropInitialCropWindowPaddingRatio="0"
+        app:cropBorderCornerThickness="2dp"
+        app:cropBorderLineThickness="1dp"
+        app:cropMinCropResultWidthPX="10"
+        app:cropMinCropResultHeightPX="10"
+        app:cropBorderCornerOffset="2dp"
+        app:layout_constraintBottom_toTopOf="@id/angleText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/angleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CropImageView"
+        app:layout_constraintBottom_toTopOf="@id/wheelView"
+        />
+
+    <com.github.shchurov.horizontalwheelview.HorizontalWheelView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:id="@+id/wheelView"
+        app:activeColor="@color/colorBlue"
+        app:normalColor="@color/colorWhite"
+        app:marksCount="72"
+        app:endLock="true"
+        app:snapToMarks="true"
+        app:showActiveRange="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/angleText"
+        app:layout_constraintBottom_toTopOf="@id/button"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:onClick="onLoadImageClick"
+        android:text="@string/upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rotateView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/rotateView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:onClick="onRotate"
+        android:src="@drawable/baseline_rotate_90_degrees_ccw_white_24"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintTop_toTopOf="@id/button"
+        app:layout_constraintStart_toEndOf="@id/button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        android:onClick="onCropImageClick"
+        android:text="@string/crop"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rotateView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
